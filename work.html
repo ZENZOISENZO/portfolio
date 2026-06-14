@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Work — Enzo Piquet">
+  <title>Work — Enzo Piquet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ─── Navigation ─────────────────────── -->
+  <nav>
+    <a href="index.html" class="nav-logo">Enzo Piquet</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="work.html">
+          <span data-en>Work</span>
+          <span data-jp>作品</span>
+        </a>
+        <a href="about.html">
+          <span data-en>About</span>
+          <span data-jp>について</span>
+        </a>
+        <a href="contact.html">
+          <span data-en>Contact</span>
+          <span data-jp>連絡</span>
+        </a>
+      </div>
+      <div class="lang-toggle">
+        <button data-lang="en">EN</button>
+        <span class="divider">/</span>
+        <button data-lang="jp">JP</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ─── Page Header ────────────────────── -->
+    <div class="work-page-header">
+      <h1 class="work-page-title">
+        <span data-en>Work</span>
+        <span data-jp>作品</span>
+      </h1>
+      <div class="work-filters">
+        <button class="filter-btn active" data-filter="all">
+          <span data-en>All</span>
+          <span data-jp>すべて</span>
+        </button>
+        <button class="filter-btn" data-filter="photo">
+          <span data-en>Photo</span>
+          <span data-jp>写真</span>
+        </button>
+        <button class="filter-btn" data-filter="video">
+          <span data-en>Video</span>
+          <span data-jp>映像</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ─── Projects Grid ──────────────────── -->
+    <!--
+      HOW TO ADD A PROJECT:
+      1. Duplicate one of the .work-item blocks below
+      2. Set data-category to "photo" or "video"
+      3. Update the href to your project page (e.g. "projects/brand-name.html")
+      4. Uncomment and update the <img> tag with your cover image
+      5. Update the number, title, and category text
+    -->
+
+    <div class="work-grid">
+
+      <a href="project.html" class="work-item" data-category="photo">
+        <div class="work-item-img">
+          <!-- <img src="assets/images/project-01-cover.jpg" alt=""> -->
+        </div>
+        <div class="work-item-info">
+          <span class="work-item-num">[001]</span>
+          <h3 class="work-item-title">Project Title</h3>
+          <span class="work-item-cat">35mm Film — Fashion</span>
+        </div>
+      </a>
+
+      <a href="project.html" class="work-item" data-category="video">
+        <div class="work-item-img">
+          <!-- <img src="assets/images/project-02-cover.jpg" alt=""> -->
+        </div>
+        <div class="work-item-info">
+          <span class="work-item-num">[002]</span>
+          <h3 class="work-item-title">Project Title</h3>
+          <span class="work-item-cat">16mm Film — Editorial</span>
+        </div>
+      </a>
+
+      <a href="project.html" class="work-item" data-category="photo">
+        <div class="work-item-img">
+          <!-- <img src="assets/images/project-03-cover.jpg" alt=""> -->
+        </div>
+        <div class="work-item-info">
+          <span class="work-item-num">[003]</span>
+          <h3 class="work-item-title">Project Title</h3>
+          <span class="work-item-cat">35mm Film — Streetwear</span>
+        </div>
+      </a>
+
+      <a href="project.html" class="work-item" data-category="video">
+        <div class="work-item-img">
+          <!-- <img src="assets/images/project-04-cover.jpg" alt=""> -->
+        </div>
+        <div class="work-item-info">
+          <span class="work-item-num">[004]</span>
+          <h3 class="work-item-title">Project Title</h3>
+          <span class="work-item-cat">16mm Film — Campaign</span>
+        </div>
+      </a>
+
+      <a href="project.html" class="work-item" data-category="photo">
+        <div class="work-item-img">
+          <!-- <img src="assets/images/project-05-cover.jpg" alt=""> -->
+        </div>
+        <div class="work-item-info">
+          <span class="work-item-num">[005]</span>
+          <h3 class="work-item-title">Project Title</h3>
+          <span class="work-item-cat">Medium Format — Outdoor</span>
+        </div>
+      </a>
+
+      <a href="project.html" class="work-item" data-category="photo">
+        <div class="work-item-img">
+          <!-- <img src="assets/images/project-06-cover.jpg" alt=""> -->
+        </div>
+        <div class="work-item-info">
+          <span class="work-item-num">[006]</span>
+          <h3 class="work-item-title">Project Title</h3>
+          <span class="work-item-cat">35mm Film — High Fashion</span>
+        </div>
+      </a>
+
+      <a href="project.html" class="work-item" data-category="video">
+        <div class="work-item-img">
+          <!-- <img src="assets/images/project-07-cover.jpg" alt=""> -->
+        </div>
+        <div class="work-item-info">
+          <span class="work-item-num">[007]</span>
+          <h3 class="work-item-title">Project Title</h3>
+          <span class="work-item-cat">16mm Film — Mixed Media</span>
+        </div>
+      </a>
+
+      <a href="project.html" class="work-item" data-category="photo">
+        <div class="work-item-img">
+          <!-- <img src="assets/images/project-08-cover.jpg" alt=""> -->
+        </div>
+        <div class="work-item-info">
+          <span class="work-item-num">[008]</span>
+          <h3 class="work-item-title">Project Title</h3>
+          <span class="work-item-cat">35mm Film — Editorial</span>
+        </div>
+      </a>
+
+      <a href="project.html" class="work-item" data-category="photo">
+        <div class="work-item-img">
+          <!-- <img src="assets/images/project-09-cover.jpg" alt=""> -->
+        </div>
+        <div class="work-item-info">
+          <span class="work-item-num">[009]</span>
+          <h3 class="work-item-title">Project Title</h3>
+          <span class="work-item-cat">Medium Format — Campaign</span>
+        </div>
+      </a>
+
+    </div>
+
+  </main>
+
+  <!-- ─── Footer ─────────────────────────── -->
+  <footer>
+    <span>© 2025 Enzo Piquet</span>
+    <span data-en>Tokyo, Japan</span>
+    <span data-jp>東京、日本</span>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

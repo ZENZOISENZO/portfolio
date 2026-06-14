@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Project Title — Enzo Piquet">
+  <!--
+    DUPLICATE THIS FILE for each project.
+    Name it something like: brand-name-year.html
+    Place it in the root folder or a /projects/ subfolder.
+    Update all placeholder text and uncomment the image/video tags.
+  -->
+  <title>Project Title — Enzo Piquet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ─── Navigation ─────────────────────── -->
+  <nav>
+    <a href="index.html" class="nav-logo">Enzo Piquet</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="work.html">
+          <span data-en>Work</span>
+          <span data-jp>作品</span>
+        </a>
+        <a href="about.html">
+          <span data-en>About</span>
+          <span data-jp>について</span>
+        </a>
+        <a href="contact.html">
+          <span data-en>Contact</span>
+          <span data-jp>連絡</span>
+        </a>
+      </div>
+      <div class="lang-toggle">
+        <button data-lang="en">EN</button>
+        <span class="divider">/</span>
+        <button data-lang="jp">JP</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ─── Cover Image / Video ────────────── -->
+    <div class="project-cover">
+      <!--
+        FOR PHOTO PROJECTS — uncomment this:
+        <img src="assets/images/project-01-cover.jpg" alt="Project Title">
+
+        FOR VIDEO PROJECTS — uncomment this:
+        <video src="assets/video/project-01-cover.mp4" autoplay muted loop playsinline></video>
+      -->
+    </div>
+
+    <!-- ─── Project Header ─────────────────── -->
+    <div class="project-header">
+      <h1 class="project-title">Project Title</h1>
+      <div class="project-meta">
+        <div class="project-meta-item">
+          <span class="meta-label" data-en>Year</span>
+          <span class="meta-label" data-jp>年</span>
+          <span class="meta-value">2025</span>
+        </div>
+        <div class="project-meta-item">
+          <span class="meta-label" data-en>Client</span>
+          <span class="meta-label" data-jp>クライアント</span>
+          <span class="meta-value">Brand Name</span>
+        </div>
+        <div class="project-meta-item">
+          <span class="meta-label" data-en>Medium</span>
+          <span class="meta-label" data-jp>媒体</span>
+          <span class="meta-value">35mm Film</span>
+          <!--
+            Other options:
+            16mm Film
+            Medium Format
+            16mm + Digital
+            Mixed Media
+          -->
+        </div>
+        <div class="project-meta-item">
+          <span class="meta-label" data-en>Category</span>
+          <span class="meta-label" data-jp>カテゴリー</span>
+          <span class="meta-value">Fashion</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Description ────────────────────── -->
+    <div class="project-description">
+      <p data-en>
+        Short description of the project — the concept, the context, or what made
+        this shoot interesting. Keep it concise. One or two sentences is enough.
+      </p>
+      <p data-jp>
+        プロジェクトの短い説明。コンセプト、背景、またはこの撮影を特別にしたものについて。簡潔に。
+      </p>
+    </div>
+
+    <!-- ─── Gallery ─────────────────────────── -->
+    <!--
+      GALLERY LAYOUT OPTIONS:
+      - Full width single image:    <div class="gallery-item">
+      - Two images side by side:    <div class="gallery-item two-col">
+      - Vimeo video embed:          see video example below
+
+      Add or remove items as needed.
+      Recommended: mix of full-width and two-col for rhythm.
+    -->
+    <div class="project-gallery">
+
+      <!-- Full width image -->
+      <div class="gallery-item">
+        <!-- <img src="assets/images/project-01-01.jpg" alt=""> -->
+      </div>
+
+      <!-- Two images side by side -->
+      <div class="gallery-item two-col">
+        <div>
+          <!-- <img src="assets/images/project-01-02.jpg" alt=""> -->
+        </div>
+        <div>
+          <!-- <img src="assets/images/project-01-03.jpg" alt=""> -->
+        </div>
+      </div>
+
+      <!-- Full width image -->
+      <div class="gallery-item">
+        <!-- <img src="assets/images/project-01-04.jpg" alt=""> -->
+      </div>
+
+      <!-- Vimeo video embed (for video projects) -->
+      <!--
+      <div class="gallery-item">
+        <div class="video-wrap">
+          <iframe
+            src="https://player.vimeo.com/video/YOUR_VIDEO_ID?autoplay=0&title=0&byline=0&portrait=0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+      -->
+
+      <!-- Full width image -->
+      <div class="gallery-item">
+        <!-- <img src="assets/images/project-01-05.jpg" alt=""> -->
+      </div>
+
+      <!-- Two images side by side -->
+      <div class="gallery-item two-col">
+        <div>
+          <!-- <img src="assets/images/project-01-06.jpg" alt=""> -->
+        </div>
+        <div>
+          <!-- <img src="assets/images/project-01-07.jpg" alt=""> -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ─── Next / Prev Navigation ─────────── -->
+    <div class="project-nav">
+      <a href="project.html" class="project-nav-item prev">
+        <span class="nav-dir" data-en>← Previous</span>
+        <span class="nav-dir" data-jp>← 前のプロジェクト</span>
+        <span class="nav-title">Previous Project Title</span>
+      </a>
+      <a href="project.html" class="project-nav-item next">
+        <span class="nav-dir" data-en>Next →</span>
+        <span class="nav-dir" data-jp>次のプロジェクト →</span>
+        <span class="nav-title">Next Project Title</span>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- ─── Footer ─────────────────────────── -->
+  <footer>
+    <span>© 2025 Enzo Piquet</span>
+    <span data-en>Tokyo, Japan</span>
+    <span data-jp>東京、日本</span>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
