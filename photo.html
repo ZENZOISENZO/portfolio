@@ -526,6 +526,7 @@
       galleryPhotos.forEach(function (src, i) {
         var img = document.createElement('img');
         img.className = 'gal-photo';
+        img.loading = 'lazy';
         img.src = src;
         img.alt = p.title + ' ' + (i + 1);
         (i % 2 === 0 ? colL : colR).appendChild(img);
@@ -577,6 +578,7 @@
       /* cover photo */
       var img = document.createElement('img');
       img.className = 'cover-photo';
+      img.loading = 'lazy';
       img.src = p.photos[0];
       img.alt = p.title;
       img.addEventListener('load', function () { this.style.opacity = '1'; });
