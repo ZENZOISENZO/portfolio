@@ -1,0 +1,67 @@
+:root {
+  /* --- canvas ------------------------------------------------------- */
+  --canvas-w: 1920px;
+
+  /* --- colour ------------------------------------------------------- */
+  --bg: #FFFFFF;
+  --ink: #000000;
+
+  /* --- family ------------------------------------------------------- */
+  --font: Arial, "Liberation Sans", Arimo, Helvetica, sans-serif;
+
+  /* --- size --------------------------------------------------------- */
+  --fs-logo: 23px;
+  --fs-nav: 19px;
+  --fs-contact: 19px;
+  --fs-caption: 19px;
+  --fs-body: 24px;
+
+  /* --- line-height -------------------------------------------------- */
+  --lh-body: 1.05;
+  --lh-nav: 1.3;
+  --lh-contact: 1.0;
+  --lh-logo: 1.0;
+
+  /* --- weight ------------------------------------------------------- */
+  --fw-regular: 400;
+  --fw-bold: 700;
+
+  /* --- left rail ---------------------------------------------------- */
+  --rail-x: 49px;
+  --rail-nav-x: 65px;
+  --rail-child-x: 90px;
+  --rail-indent: 25px;
+  --rail-logo-bl: 99px;
+  --rail-nav-bl: 170px;
+  --rail-nav-pitch: 24.7px;
+
+  /* --- about page -------------------------------------------------- */
+  --about-col-x: 507.5px;
+  --about-img-y: 187.2px;
+  --about-img-w: 292.6px;
+  --about-img-h: 328.9px;
+  --about-body-bl: 632.5px;
+  --about-body-max: 640px;
+  --about-para-gap: 25.3px;
+  --contact-x: 831.7px;
+  --contact-bl-1: 464.4px;
+  --contact-name-mb: 8.5px;
+
+  /* --- video / photo tokens (kept for future pages) ----------------- */
+  --video-x: 366.3px;
+  --video-y: 174.9px;
+  --video-w: 524.8px;
+  --video-h: 318.5px;
+  --shot-w: 265px;
+  --shot-h: 180px;
+
+  /* --- spacing helpers --------------------------------------------- */
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-30: 30px;
+  --space-32: 32px;
+  --space-40: 40px;
+}

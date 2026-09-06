@@ -1,67 +1,43 @@
-/* ─── Language Toggle ─────────────────────── */
-function setLang(lang) {
-  document.body.classList.toggle('lang-jp', lang === 'jp');
-  localStorage.setItem('lang', lang);
-  document.querySelectorAll('[data-lang]').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.lang === lang);
-  });
-  // Update html lang attribute for accessibility
-  document.documentElement.lang = lang === 'jp' ? 'ja' : 'en';
-}
+/* ─── Slideshow ────────────────────────────── */
+function initSlideshows() {
+  document.querySelectorAll('.slideshow').forEach(sl => {
+    const raw = sl.dataset.images;
+    if (!raw) return;
 
-/* ─── Work Filter ─────────────────────────── */
-function initFilters() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const workItems  = document.querySelectorAll('.work-item');
+    let images;
+    try { images = JSON.parse(raw); } catch (e) { return; }
+    if (!images.length) return;
 
-  if (!filterBtns.length) return;
+    const mainImg = sl.querySelector('.s-main img');
+    if (!mainImg) return;
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    let current = 0;
 
-      const filter = btn.dataset.filter;
-      workItems.forEach(item => {
-        if (filter === 'all' || item.dataset.category === filter) {
-          item.style.display = '';
-        } else {
-          item.style.display = 'none';
-        }
+    function goTo(idx) {
+      current = ((idx % images.length) + images.length) % images.length;
+      mainImg.style.opacity = '0';
+      setTimeout(() => {
+        mainImg.src = images[current];
+        mainImg.style.opacity = '1';
+      }, 130);
+    }
+
+    /* Arrow buttons */
+    sl.querySelectorAll('.s-arrow').forEach(btn => {
+      btn.addEventListener('click', () => {
+        goTo(current + (parseInt(btn.dataset.dir) || 1));
       });
+    });
+
+    /* Thumbnail click — jump to that image */
+    sl.querySelectorAll('.s-thumb').forEach(thumb => {
+      const idx = parseInt(thumb.dataset.goto) || 0;
+      thumb.addEventListener('click', () => goTo(idx));
     });
   });
 }
 
-/* ─── Nav Scroll State ────────────────────── */
-function initNav() {
-  const nav = document.querySelector('nav');
-  if (!nav) return;
-
-  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
-  // Highlight active page link
-  const path = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === path || (path === '' && href === 'index.html')) {
-      link.classList.add('active');
-    }
-  });
-}
-
-/* ─── Init ────────────────────────────────── */
+/* ─── Init ─────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-  // Language
-  const savedLang = localStorage.getItem('lang') || 'en';
-  setLang(savedLang);
-
-  document.querySelectorAll('[data-lang]').forEach(btn => {
-    btn.addEventListener('click', () => setLang(btn.dataset.lang));
-  });
-
-  initNav();
-  initFilters();
+  initSlideshows();
 });

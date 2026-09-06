@@ -3,90 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Contact — Enzo Piquet">
-  <title>Contact — Enzo Piquet</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="About — Enzo Piquet">
+  <title>About — Enzo Piquet</title>
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Base ── */
+    body {
+      background: #fff;
+      color: #000;
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 12px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 190px; height: 100vh;
+      padding: 30px 28px;
+      z-index: 10;
+      background: #fff;
+    }
+    .site-name {
+      display: block;
+      font-size: 15px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 28px; line-height: 1.2; color: #000;
+    }
+    .sidebar-nav { display: flex; flex-direction: column; }
+    .nav-parent {
+      font-size: 12px; font-weight: 700;
+      line-height: 2.15; display: block;
+      color: #000; letter-spacing: 0.01em;
+    }
+    .nav-sub {
+      display: block; font-weight: 400;
+      font-size: 12px; line-height: 2.15;
+      padding-left: 16px; color: #000;
+      letter-spacing: 0.01em; transition: opacity 0.15s;
+    }
+    .nav-sub:hover { opacity: 0.4; }
+    .nav-contact {
+      font-size: 12px; font-weight: 700;
+      line-height: 2.15; display: block;
+      color: #000; letter-spacing: 0.01em;
+      transition: opacity 0.15s; margin-top: 4px;
+    }
+    .nav-contact:hover, .nav-contact.active { opacity: 0.4; }
+
+    /* ── Main ── */
+    main {
+      margin-left: 190px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Layout: photo left, info right ── */
+    .about-layout {
+      display: flex;
+      gap: 60px;
+      align-items: center;
+    }
+
+    /* ── Portrait ── */
+    .about-photo img {
+      width: 240px;
+      height: auto;
+      display: block;
+    }
+
+    /* ── Info ── */
+    .about-info {
+      padding-top: 4px;
+    }
+    .about-name {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+    .about-line {
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 2;
+      color: #000;
+    }
+    .about-line a:hover { opacity: 0.5; }
+  </style>
 </head>
 <body>
 
-  <!-- ─── Navigation ─────────────────────── -->
-  <nav>
-    <a href="index.html" class="nav-logo">Enzo Piquet</a>
-    <div class="nav-right">
-      <div class="nav-links">
-        <a href="work.html">
-          <span data-en>Work</span>
-          <span data-jp>作品</span>
-        </a>
-        <a href="about.html">
-          <span data-en>About</span>
-          <span data-jp>について</span>
-        </a>
-        <a href="contact.html">
-          <span data-en>Contact</span>
-          <span data-jp>連絡</span>
-        </a>
-      </div>
-      <div class="lang-toggle">
-        <button data-lang="en">EN</button>
-        <span class="divider">/</span>
-        <button data-lang="jp">JP</button>
-      </div>
-    </div>
-  </nav>
+  <aside class="sidebar">
+    <a href="index.html" class="site-name">Enzo Piquet</a>
+    <nav class="sidebar-nav">
+      <span class="nav-parent">work</span>
+      <a href="photo.html" class="nav-sub">photo</a>
+      <a href="video.html" class="nav-sub">video</a>
+      <a href="contact.html" class="nav-contact active">contact</a>
+    </nav>
+  </aside>
 
   <main>
-    <div class="contact-wrap">
-      <div class="contact-inner">
+    <div class="about-layout">
 
-        <h1 class="contact-heading">
-          <span data-en>Let's make<br><em>something together.</em></span>
-          <span data-jp>一緒に<br><em>何かを作りましょう。</em></span>
-        </h1>
-
-        <!-- Email -->
-        <p class="contact-label" data-en>Email</p>
-        <p class="contact-label" data-jp>メール</p>
-        <!--
-          Replace your@email.com with your actual email address
-        -->
-        <a href="mailto:your@email.com" class="contact-email">your@email.com</a>
-
-        <!-- Social -->
-        <p class="contact-socials-label" data-en>Follow</p>
-        <p class="contact-socials-label" data-jp>フォロー</p>
-        <div class="contact-socials">
-          <!--
-            Replace # with your actual URLs
-          -->
-          <a href="#" target="_blank" rel="noopener">Instagram</a>
-          <a href="#" target="_blank" rel="noopener">Vimeo</a>
-          <!--
-            Optional: add more as needed
-            <a href="#" target="_blank" rel="noopener">Behance</a>
-          -->
-        </div>
-
-        <!-- Location -->
-        <p class="contact-location">
-          <span data-en>Based in Tokyo, Japan — Available worldwide</span>
-          <span data-jp>東京在住 — 世界中での撮影対応可</span>
-        </p>
-
+      <!-- Portrait -->
+      <div class="about-photo">
+        <img src="assets/images/portrait/SaveClip.App_464864717_18251748013261301_8156044011587412282_n.jpg"
+             alt="Enzo Piquet">
       </div>
+
+      <!-- Info -->
+      <div class="about-info">
+        <div class="about-name">Enzo Piquet</div>
+        <div class="about-line">+66 07090200972</div>
+        <div class="about-line"><a href="mailto:enzopiquet93@gmail.com">enzopiquet93@gmail.com</a></div>
+        <div class="about-line"><a href="https://instagram.com/zenzopics" target="_blank">Instagram: @zenzopics</a></div>
+      </div>
+
     </div>
   </main>
 
-  <!-- ─── Footer ─────────────────────────── -->
-  <footer>
-    <span>© 2025 Enzo Piquet</span>
-    <span data-en>Tokyo, Japan</span>
-    <span data-jp>東京、日本</span>
-  </footer>
-
-  <script src="js/main.js"></script>
 </body>
 </html>

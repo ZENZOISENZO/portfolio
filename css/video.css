@@ -1,0 +1,29 @@
+@import url("/tokens.css");
+
+/* Video page styles driven by design tokens */
+.canvas{ width: var(--canvas-w); margin: 0 auto; color: var(--ink); font-family: var(--font); }
+
+main{ margin-left: 190px; padding: 80px 60px 160px; box-sizing: border-box; }
+
+.video-entry{ width:100%; max-width: var(--canvas-w); margin-bottom: 96px; }
+.video-entry-title{ font-size: 11px; font-weight: var(--fw-bold); text-transform: uppercase; margin-bottom: 13px; width: 524.8px; text-align: center; letter-spacing: normal; }
+
+.video-layout{ display:flex; gap: 10px; align-items: stretch; }
+
+/* Player: 16:9 ratio */
+.video-player{ flex: 0 0 640px; height: 360px; background: #000; display:flex; align-items:center; justify-content:center; }
+.video-player iframe, .video-player video{ width: 100%; height: 100%; display:block; }
+
+/* 2x2 shots grid — same dimensions as video player */
+.video-shots{ flex: 0 0 640px; height: 360px; display:grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 2px; }
+.video-shots img{ width:100%; height:100%; object-fit: cover; display:block; min-height:0; }
+
+/* Caption style */
+/* caption style is controlled by the single .video-entry-title rule above */
+
+/* Responsive: scale down while preserving exact type and line-heights */
+@media (max-width: 1280px){
+  main{ margin-left: 0; padding: 40px 20px 80px; }
+  .video-player{ width: 100%; height: auto; aspect-ratio: 16/9; }
+  .video-shots{ grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 5px; }
+}

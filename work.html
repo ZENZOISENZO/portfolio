@@ -3,32 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Work — Enzo Piquet">
+  <meta name="description" content="Work — Enzo Piquet, film photographer & videographer based in Tokyo">
   <title>Work — Enzo Piquet</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,200;0,14..32,300;0,14..32,400;1,14..32,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- ─── Navigation ─────────────────────── -->
   <nav>
-    <a href="index.html" class="nav-logo">Enzo Piquet</a>
+    <a href="photo.html" class="nav-logo">Enzo Piquet</a>
     <div class="nav-right">
       <div class="nav-links">
-        <a href="work.html">
-          <span data-en>Work</span>
-          <span data-jp>作品</span>
-        </a>
-        <a href="about.html">
-          <span data-en>About</span>
-          <span data-jp>について</span>
-        </a>
-        <a href="contact.html">
-          <span data-en>Contact</span>
-          <span data-jp>連絡</span>
-        </a>
+        <a href="work.html" class="active"><span data-en>Work</span><span data-jp>作品</span></a>
+        <a href="about.html"><span data-en>About</span><span data-jp>について</span></a>
+        <a href="contact.html"><span data-en>Contact</span><span data-jp>連絡</span></a>
       </div>
       <div class="lang-toggle">
         <button data-lang="en">EN</button>
@@ -40,136 +30,180 @@
 
   <main>
 
-    <!-- ─── Page Header ────────────────────── -->
-    <div class="work-page-header">
-      <h1 class="work-page-title">
-        <span data-en>Work</span>
-        <span data-jp>作品</span>
-      </h1>
-      <div class="work-filters">
-        <button class="filter-btn active" data-filter="all">
-          <span data-en>All</span>
-          <span data-jp>すべて</span>
-        </button>
-        <button class="filter-btn" data-filter="photo">
-          <span data-en>Photo</span>
-          <span data-jp>写真</span>
-        </button>
-        <button class="filter-btn" data-filter="video">
-          <span data-en>Video</span>
-          <span data-jp>映像</span>
-        </button>
+    <!-- 001 — Featured Project -->
+    <a href="projects/bull.html" class="work-featured">
+      <div class="work-featured-bg">
+        <img src="assets/images/BULL/S1/header.jpg" alt="Bull">
       </div>
-    </div>
+      <div class="work-featured-info">
+        <span class="wf-index">001</span>
+        <span class="wf-title">Bull</span>
+        <span class="wf-sub">
+          <span data-en>Fashion &nbsp;—&nbsp; 2024</span>
+          <span data-jp>ファッション &nbsp;—&nbsp; 2024</span>
+        </span>
+      </div>
+    </a>
 
-    <!-- ─── Projects Grid ──────────────────── -->
-    <!--
-      HOW TO ADD A PROJECT:
-      1. Duplicate one of the .work-item blocks below
-      2. Set data-category to "photo" or "video"
-      3. Update the href to your project page (e.g. "projects/brand-name.html")
-      4. Uncomment and update the <img> tag with your cover image
-      5. Update the number, title, and category text
-    -->
+    <!-- 002–015 — Text list -->
+    <div class="work-list" id="workList">
 
-    <div class="work-grid">
+      <!-- Cursor-following preview image -->
+      <div class="work-preview" id="workPreview" aria-hidden="true">
+        <img src="" alt="" id="workPreviewImg">
+      </div>
 
-      <a href="project.html" class="work-item" data-category="photo">
-        <div class="work-item-img">
-          <!-- <img src="assets/images/project-01-cover.jpg" alt=""> -->
-        </div>
-        <div class="work-item-info">
-          <span class="work-item-num">[001]</span>
-          <h3 class="work-item-title">Project Title</h3>
-          <span class="work-item-cat">35mm Film — Fashion</span>
+      <a class="work-list-item" href="projects/peachyden.html"
+         data-img="assets/images/PEACHYDEN/header.jpg">
+        <span class="wli-idx">002</span>
+        <span class="wli-title">Peachyden</span>
+        <div class="wli-meta">
+          <span class="wli-year">2024</span>
+          <span class="wli-cat" data-en>Fashion</span>
+          <span class="wli-cat" data-jp>ファッション</span>
         </div>
       </a>
 
-      <a href="project.html" class="work-item" data-category="video">
-        <div class="work-item-img">
-          <!-- <img src="assets/images/project-02-cover.jpg" alt=""> -->
-        </div>
-        <div class="work-item-info">
-          <span class="work-item-num">[002]</span>
-          <h3 class="work-item-title">Project Title</h3>
-          <span class="work-item-cat">16mm Film — Editorial</span>
-        </div>
-      </a>
-
-      <a href="project.html" class="work-item" data-category="photo">
-        <div class="work-item-img">
-          <!-- <img src="assets/images/project-03-cover.jpg" alt=""> -->
-        </div>
-        <div class="work-item-info">
-          <span class="work-item-num">[003]</span>
-          <h3 class="work-item-title">Project Title</h3>
-          <span class="work-item-cat">35mm Film — Streetwear</span>
+      <a class="work-list-item" href="projects/dr-martens.html"
+         data-img="assets/images/DR%20MARTENS/header.jpg">
+        <span class="wli-idx">003</span>
+        <span class="wli-title">Dr. Martens</span>
+        <div class="wli-meta">
+          <span class="wli-year">2024</span>
+          <span class="wli-cat" data-en>Campaign</span>
+          <span class="wli-cat" data-jp>キャンペーン</span>
         </div>
       </a>
 
-      <a href="project.html" class="work-item" data-category="video">
-        <div class="work-item-img">
-          <!-- <img src="assets/images/project-04-cover.jpg" alt=""> -->
-        </div>
-        <div class="work-item-info">
-          <span class="work-item-num">[004]</span>
-          <h3 class="work-item-title">Project Title</h3>
-          <span class="work-item-cat">16mm Film — Campaign</span>
-        </div>
-      </a>
-
-      <a href="project.html" class="work-item" data-category="photo">
-        <div class="work-item-img">
-          <!-- <img src="assets/images/project-05-cover.jpg" alt=""> -->
-        </div>
-        <div class="work-item-info">
-          <span class="work-item-num">[005]</span>
-          <h3 class="work-item-title">Project Title</h3>
-          <span class="work-item-cat">Medium Format — Outdoor</span>
+      <a class="work-list-item" href="projects/pivot-stretchline.html"
+         data-img="assets/images/ZAOBA.%20PIVOT%20%3A%20STRETCHLINE%20/PIVOT/1144881160.JPG">
+        <span class="wli-idx">004</span>
+        <span class="wli-title">Pivot / Stretchline</span>
+        <div class="wli-meta">
+          <span class="wli-year">2024</span>
+          <span class="wli-cat" data-en>Fashion</span>
+          <span class="wli-cat" data-jp>ファッション</span>
         </div>
       </a>
 
-      <a href="project.html" class="work-item" data-category="photo">
-        <div class="work-item-img">
-          <!-- <img src="assets/images/project-06-cover.jpg" alt=""> -->
-        </div>
-        <div class="work-item-info">
-          <span class="work-item-num">[006]</span>
-          <h3 class="work-item-title">Project Title</h3>
-          <span class="work-item-cat">35mm Film — High Fashion</span>
-        </div>
-      </a>
-
-      <a href="project.html" class="work-item" data-category="video">
-        <div class="work-item-img">
-          <!-- <img src="assets/images/project-07-cover.jpg" alt=""> -->
-        </div>
-        <div class="work-item-info">
-          <span class="work-item-num">[007]</span>
-          <h3 class="work-item-title">Project Title</h3>
-          <span class="work-item-cat">16mm Film — Mixed Media</span>
+      <a class="work-list-item" href="projects/joe.html"
+         data-img="assets/images/JOE/header.jpg">
+        <span class="wli-idx">005</span>
+        <span class="wli-title">Joe</span>
+        <div class="wli-meta">
+          <span class="wli-year">2024</span>
+          <span class="wli-cat" data-en>Portrait</span>
+          <span class="wli-cat" data-jp>ポートレート</span>
         </div>
       </a>
 
-      <a href="project.html" class="work-item" data-category="photo">
-        <div class="work-item-img">
-          <!-- <img src="assets/images/project-08-cover.jpg" alt=""> -->
-        </div>
-        <div class="work-item-info">
-          <span class="work-item-num">[008]</span>
-          <h3 class="work-item-title">Project Title</h3>
-          <span class="work-item-cat">35mm Film — Editorial</span>
+      <a class="work-list-item" href="projects/m-torture-onhim.html"
+         data-img="assets/images/ZAOBA.%20M%20TORTURE%20%3A%20ONHIM/M%20TORTURE/header.jpg">
+        <span class="wli-idx">006</span>
+        <span class="wli-title">M Torture / Onhim</span>
+        <div class="wli-meta">
+          <span class="wli-year">2024</span>
+          <span class="wli-cat" data-en>Fashion</span>
+          <span class="wli-cat" data-jp>ファッション</span>
         </div>
       </a>
 
-      <a href="project.html" class="work-item" data-category="photo">
-        <div class="work-item-img">
-          <!-- <img src="assets/images/project-09-cover.jpg" alt=""> -->
+      <a class="work-list-item" href="projects/fof.html"
+         data-img="assets/images/FOF/LOOKBOOK/header.jpg">
+        <span class="wli-idx">007</span>
+        <span class="wli-title">FOF</span>
+        <div class="wli-meta">
+          <span class="wli-year">2024</span>
+          <span class="wli-cat" data-en>Lookbook</span>
+          <span class="wli-cat" data-jp>ルックブック</span>
         </div>
-        <div class="work-item-info">
-          <span class="work-item-num">[009]</span>
-          <h3 class="work-item-title">Project Title</h3>
-          <span class="work-item-cat">Medium Format — Campaign</span>
+      </a>
+
+      <a class="work-list-item" href="projects/keen.html"
+         data-img="assets/images/keen/front%20page.jpg">
+        <span class="wli-idx">008</span>
+        <span class="wli-title">Keen</span>
+        <div class="wli-meta">
+          <span class="wli-year">2024</span>
+          <span class="wli-cat" data-en>Campaign</span>
+          <span class="wli-cat" data-jp>キャンペーン</span>
+        </div>
+      </a>
+
+      <a class="work-list-item" href="projects/hast-paris.html"
+         data-img="assets/images/HAST%20-%20PARIS/header.jpg">
+        <span class="wli-idx">009</span>
+        <span class="wli-title">Hast — Paris</span>
+        <div class="wli-meta">
+          <span class="wli-year">2024</span>
+          <span class="wli-cat" data-en>Campaign</span>
+          <span class="wli-cat" data-jp>キャンペーン</span>
+        </div>
+      </a>
+
+      <a class="work-list-item" href="projects/asics-city.html"
+         data-img="assets/images/ASICS%20SPORTSTYLE%20TOKYO%20%3A%20KYOTO/TOKYO/header.jpg">
+        <span class="wli-idx">010</span>
+        <span class="wli-title">Asics Tokyo / Kyoto</span>
+        <div class="wli-meta">
+          <span class="wli-year">2023</span>
+          <span class="wli-cat" data-en>Campaign</span>
+          <span class="wli-cat" data-jp>キャンペーン</span>
+        </div>
+      </a>
+
+      <a class="work-list-item" href="projects/palladium.html"
+         data-img="assets/images/PALLADIUM/header.jpg">
+        <span class="wli-idx">011</span>
+        <span class="wli-title">Palladium</span>
+        <div class="wli-meta">
+          <span class="wli-year">2023</span>
+          <span class="wli-cat" data-en>Campaign</span>
+          <span class="wli-cat" data-jp>キャンペーン</span>
+        </div>
+      </a>
+
+      <a class="work-list-item" href="projects/asics-aw.html"
+         data-img="assets/images/ASICS%20SPORTSTYLE%20A%3AW%20-%20apparel%20collection%202024/header.jpg">
+        <span class="wli-idx">012</span>
+        <span class="wli-title">Asics A/W 2024</span>
+        <div class="wli-meta">
+          <span class="wli-year">2023</span>
+          <span class="wli-cat" data-en>Campaign</span>
+          <span class="wli-cat" data-jp>キャンペーン</span>
+        </div>
+      </a>
+
+      <a class="work-list-item" href="projects/gosh.html"
+         data-img="assets/images/GOSH/header.jpg">
+        <span class="wli-idx">013</span>
+        <span class="wli-title">Gosh</span>
+        <div class="wli-meta">
+          <span class="wli-year">2023</span>
+          <span class="wli-cat" data-en>Fashion</span>
+          <span class="wli-cat" data-jp>ファッション</span>
+        </div>
+      </a>
+
+      <a class="work-list-item" href="projects/maven.html"
+         data-img="assets/images/maven/front%20page.jpg">
+        <span class="wli-idx">014</span>
+        <span class="wli-title">Maven</span>
+        <div class="wli-meta">
+          <span class="wli-year">2023</span>
+          <span class="wli-cat" data-en>Editorial</span>
+          <span class="wli-cat" data-jp>エディトリアル</span>
+        </div>
+      </a>
+
+      <a class="work-list-item" href="projects/asics-ss.html"
+         data-img="assets/images/ASICS%20SPORTSTYLE%20S%3AS%20-%20apparel%20collection%202024/header.jpg">
+        <span class="wli-idx">015</span>
+        <span class="wli-title">Asics S/S 2024</span>
+        <div class="wli-meta">
+          <span class="wli-year">2023</span>
+          <span class="wli-cat" data-en>Campaign</span>
+          <span class="wli-cat" data-jp>キャンペーン</span>
         </div>
       </a>
 
@@ -177,7 +211,6 @@
 
   </main>
 
-  <!-- ─── Footer ─────────────────────────── -->
   <footer>
     <span>© 2025 Enzo Piquet</span>
     <span data-en>Tokyo, Japan</span>

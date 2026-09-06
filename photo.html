@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Enzo Piquet — Film Photographer &amp; Videographer, Tokyo">
+  <title>Enzo Piquet</title>
+  <style>
+    /* ── Reset ──────────────────────────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    a      { text-decoration: none; color: inherit; }
+    img    { display: block; }
+    button { background: none; border: none; cursor: pointer;
+             color: inherit; padding: 0; font-family: inherit; }
+
+    /* ── Base ───────────────────────────────────────────────────────────── */
+    body {
+      background: #fff;
+      color: #000;
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 12px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.gallery-open { overflow: hidden; }
+
+    /* ── Sidebar ─────────────────────────────────────────────────────────
+       Matches css/style.css exactly — same as video & contact pages
+    ──────────────────────────────────────────────────────────────────── */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 190px; height: 100vh;
+      padding: 30px 28px;
+      z-index: 10;
+      background: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 12px;
+    }
+    .site-name {
+      display: block;
+      font-size: 15px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 28px; line-height: 1.2; color: #000;
+    }
+    .sidebar-nav { display: flex; flex-direction: column; }
+    .nav-parent {
+      font-size: 12px; font-weight: 700;
+      line-height: 2.15; display: block;
+      color: #000; letter-spacing: 0.01em;
+    }
+    .nav-sub {
+      display: block; font-weight: 400;
+      font-size: 12px; line-height: 2.15;
+      padding-left: 16px; color: #000;
+      letter-spacing: 0.01em; transition: opacity 0.15s;
+    }
+    .nav-sub:hover, .nav-sub.active { opacity: 0.4; }
+    .nav-contact {
+      font-size: 12px; font-weight: 700;
+      line-height: 2.15; display: block;
+      color: #000; letter-spacing: 0.01em;
+      transition: opacity 0.15s; margin-top: 4px;
+    }
+    .nav-contact:hover, .nav-contact.active { opacity: 0.4; }
+
+    /* ── Main — 3-column grid, maximum photo size ───────────────────────── */
+    main {
+      margin-left: 190px;
+      padding: 60px 16px 100px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px 16px;
+      align-items: start;
+    }
+
+    /* ── Project block ─────────────────────────────────────────────────── */
+    .project-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Photo wrap — relative ancestor for arrows ───────────────────── */
+    .photo-wrap {
+      position: relative;
+      display: block;
+      cursor: pointer;
+      overflow: visible;   /* arrows live outside the photo bounds */
+      line-height: 0;
+    }
+    .photo-wrap:focus-visible { outline: 2px solid rgba(0,0,0,0.3); outline-offset: 4px; }
+
+    /* ── Cover photo — fills column, uniform 3:2 crop ────────────────── */
+    .cover-photo {
+      display: block;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.2s linear;
+    }
+
+    /* ── Slide arrows — matching louisbrun.com exactly ───────────────────
+       size:  27×44px  |  color: #B7B7B7  |  font-size: 20px
+       pos:   outside the photo, 8px gap from each edge
+       visible only while hovering the photo-wrap
+    ──────────────────────────────────────────────────────────────────── */
+    .slide-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 27px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      line-height: 1;
+      color: #B7B7B7;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      z-index: 5;
+      opacity: 0;
+      transition: opacity 0.15s, color 0.12s;
+      font-family: Arial, sans-serif;
+      user-select: none;
+    }
+    .photo-wrap:hover .slide-btn { opacity: 1; }
+    .slide-btn:hover { color: #555; }
+    /* outside the photo: 27px wide + 8px gap = 35px beyond each edge */
+    .slide-btn-prev { right: calc(100% + 8px); }
+    .slide-btn-next { left:  calc(100% + 8px); }
+    .slide-btn[hidden] { display: none; }
+
+    /* ── Project title — below photo, italic grey ────────────────────── */
+    .project-title {
+      margin-top: 8px;
+      font-family: Arial, "Liberation Sans", sans-serif;
+      font-size: 11px;
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      line-height: 1;
+      color: #000;
+    }
+
+    /* ── Gallery overlay ─────────────────────────────────────────────────
+       Full-viewport white overlay — single-column photo scroll.
+    ──────────────────────────────────────────────────────────────────── */
+    .gallery-ov {
+      position: fixed; inset: 0;
+      background: #fff;
+      z-index: 1000;
+      overflow-y: auto;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.18s linear;
+    }
+    .gallery-ov.open { opacity: 1; pointer-events: all; }
+
+    .gallery-inner {
+      padding: 56px 24px 80px;
+    }
+
+    /* fixed close button top-right */
+    .gallery-x {
+      position: fixed;
+      top: 28px; right: 40px;
+      font-size: 22px; font-weight: 400;
+      background: none; border: none;
+      opacity: 0.4; transition: opacity 0.12s;
+      cursor: pointer; line-height: 1; z-index: 1010;
+      font-family: inherit;
+    }
+    .gallery-x:hover { opacity: 1; }
+
+    /* project title below close, scrolls with content */
+    .gallery-ttl {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 18px; font-weight: 400;
+      letter-spacing: 0.01em;
+      margin-bottom: 72px;
+    }
+
+    /* single-column photo stream */
+    .gallery-scroll {
+      display: flex;
+      flex-direction: row;
+      gap: 112px;
+      align-items: flex-start;
+    }
+    .gal-col {
+      display: flex;
+      flex-direction: column;
+      gap: 185px;
+      flex: 1;
+      min-width: 0;
+    }
+    .gal-photo {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Left rail ──────────────────────────────────────────────────────── -->
+  <aside class="sidebar">
+    <a href="index.html" class="site-name">Enzo Piquet</a>
+    <nav class="sidebar-nav">
+      <span class="nav-parent">work</span>
+      <a href="photo.html"   class="nav-sub active">photo</a>
+      <a href="video.html"   class="nav-sub">video</a>
+      <a href="contact.html" class="nav-contact">contact</a>
+    </nav>
+  </aside>
+
+  <main id="main-content"></main>
+
+  <!-- ── Gallery overlay ───────────────────────────────────────────────── -->
+  <div id="gallery" class="gallery-ov" role="dialog" aria-modal="true"
+       aria-label="Project gallery" aria-hidden="true">
+    <button id="gal-close" class="gallery-x" aria-label="Close gallery">&#215;</button>
+    <div class="gallery-inner">
+      <div id="gal-title" class="gallery-ttl"></div>
+      <div id="gal-scroll" class="gallery-scroll"></div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── Project data ──────────────────────────────────────────────────── */
+    var PROJECTS = [
+      /* 1 */
+      {
+        title: 'Arnaud de France FW 2026',
+        photos: [
+          'assets/images/Arnaud%20de%20France%20Fall%20%3A%20Winter%202026/cover/1174520818-2.jpg',
+          'assets/images/Arnaud%20de%20France%20Fall%20%3A%20Winter%202026/0031_original.jpg',
+          'assets/images/Arnaud%20de%20France%20Fall%20%3A%20Winter%202026/0098_original.jpg',
+          'assets/images/Arnaud%20de%20France%20Fall%20%3A%20Winter%202026/1172091408.jpg',
+          'assets/images/Arnaud%20de%20France%20Fall%20%3A%20Winter%202026/1172091431.jpg',
+          'assets/images/Arnaud%20de%20France%20Fall%20%3A%20Winter%202026/1172092274.jpg',
+          'assets/images/Arnaud%20de%20France%20Fall%20%3A%20Winter%202026/1172092287.jpg',
+          'assets/images/Arnaud%20de%20France%20Fall%20%3A%20Winter%202026/1172092346.jpg',
+          'assets/images/Arnaud%20de%20France%20Fall%20%3A%20Winter%202026/1172092384.jpg',
+          'assets/images/Arnaud%20de%20France%20Fall%20%3A%20Winter%202026/1172092477.jpg',
+          'assets/images/Arnaud%20de%20France%20Fall%20%3A%20Winter%202026/1172092554.jpg',
+          'assets/images/Arnaud%20de%20France%20Fall%20%3A%20Winter%202026/1172092567.jpg',
+          'assets/images/Arnaud%20de%20France%20Fall%20%3A%20Winter%202026/1172092571.jpg',
+          'assets/images/Arnaud%20de%20France%20Fall%20%3A%20Winter%202026/1172092593.jpg',
+          'assets/images/Arnaud%20de%20France%20Fall%20%3A%20Winter%202026/1174520818-2.jpg'
+        ]
+      },
+      /* 2 */
+      {
+        title: 'Peachyden SS 2026',
+        photos: [
+          'assets/images/PEACHYDEN%20Spring%20%3A%20Summer%202026/cover/front%20page.JPG',
+          'assets/images/PEACHYDEN%20Spring%20%3A%20Summer%202026/1129080732.jpg',
+          'assets/images/PEACHYDEN%20Spring%20%3A%20Summer%202026/1129080827.JPG',
+          'assets/images/PEACHYDEN%20Spring%20%3A%20Summer%202026/1129081426.jpg',
+          'assets/images/PEACHYDEN%20Spring%20%3A%20Summer%202026/1129081582.jpg',
+          'assets/images/PEACHYDEN%20Spring%20%3A%20Summer%202026/1129081667.jpg',
+          'assets/images/PEACHYDEN%20Spring%20%3A%20Summer%202026/1129084040.JPG',
+          'assets/images/PEACHYDEN%20Spring%20%3A%20Summer%202026/1129084179.jpg',
+          'assets/images/PEACHYDEN%20Spring%20%3A%20Summer%202026/1129084256.jpg',
+          'assets/images/PEACHYDEN%20Spring%20%3A%20Summer%202026/header.jpg'
+        ]
+      },
+      /* 3 */
+      {
+        title: 'Johnston of Elgin',
+        photos: [
+          'assets/images/Johnston%20of%20the%20Elgin/cover/front%20page.jpg',
+          'assets/images/Johnston%20of%20the%20Elgin/2.jpg',
+          'assets/images/Johnston%20of%20the%20Elgin/CNV000010.jpg',
+          'assets/images/Johnston%20of%20the%20Elgin/CNV000022-2.jpg',
+          'assets/images/Johnston%20of%20the%20Elgin/CNV000042.jpg',
+          'assets/images/Johnston%20of%20the%20Elgin/CNV000050.jpg',
+          'assets/images/Johnston%20of%20the%20Elgin/CNV000062-2.jpg',
+          'assets/images/Johnston%20of%20the%20Elgin/CNV000066.jpg',
+          'assets/images/Johnston%20of%20the%20Elgin/CNV000069.jpg',
+          'assets/images/Johnston%20of%20the%20Elgin/CNV000084.jpg',
+          'assets/images/Johnston%20of%20the%20Elgin/CNV000162.jpg'
+        ]
+      },
+      /* 4 */
+      {
+        title: 'La pochette — Claude Ohashi',
+        photos: [
+          'assets/images/La%20pochette%20-%20Claude%20Ohashi/cover/1126910161.jpg',
+          'assets/images/La%20pochette%20-%20Claude%20Ohashi/1126910094.jpg',
+          'assets/images/La%20pochette%20-%20Claude%20Ohashi/1126910139.jpg',
+          'assets/images/La%20pochette%20-%20Claude%20Ohashi/1126910161.jpg',
+          'assets/images/La%20pochette%20-%20Claude%20Ohashi/1126910292.jpg',
+          'assets/images/La%20pochette%20-%20Claude%20Ohashi/1126910326.jpg',
+          'assets/images/La%20pochette%20-%20Claude%20Ohashi/1126910464.jpg',
+          'assets/images/La%20pochette%20-%20Claude%20Ohashi/1126910553.jpg',
+          'assets/images/La%20pochette%20-%20Claude%20Ohashi/1126910650.jpg'
+        ]
+      },
+      /* 5 */
+      {
+        title: 'Agence Yuthanan',
+        photos: [
+          'assets/images/Agence%20Yuthanan%20-Behind%20the%20scene%20/cover/front%20page.jpg',
+          'assets/images/Agence%20Yuthanan%20-Behind%20the%20scene%20/111.jpg',
+          'assets/images/Agence%20Yuthanan%20-Behind%20the%20scene%20/CNV000008.jpg',
+          'assets/images/Agence%20Yuthanan%20-Behind%20the%20scene%20/CNV000010.jpg',
+          'assets/images/Agence%20Yuthanan%20-Behind%20the%20scene%20/CNV000012.jpg',
+          'assets/images/Agence%20Yuthanan%20-Behind%20the%20scene%20/CNV000018-Enhanced-SR.jpg',
+          'assets/images/Agence%20Yuthanan%20-Behind%20the%20scene%20/CNV000040-Edit.jpg'
+        ]
+      },
+      /* 6 */
+      {
+        title: 'FOF',
+        photos: [
+          'assets/images/FOF/cover/front%20page1.jpg',
+          'assets/images/FOF/000118.jpg',
+          'assets/images/FOF/000121.jpg',
+          'assets/images/FOF/front%20page.jpg'
+        ]
+      },
+      /* 7 */
+      {
+        title: 'Hast — Paris',
+        photos: [
+          'assets/images/HAST%20-%20PARIS/cover/header.jpg',
+          'assets/images/HAST%20-%20PARIS/2722.jpg',
+          'assets/images/HAST%20-%20PARIS/IMG_2700.jpg',
+          'assets/images/HAST%20-%20PARIS/IMG_2703.jpg',
+          'assets/images/HAST%20-%20PARIS/IMG_2705.jpg',
+          'assets/images/HAST%20-%20PARIS/IMG_2706.jpg',
+          'assets/images/HAST%20-%20PARIS/IMG_2708-2.jpg',
+          'assets/images/HAST%20-%20PARIS/front%20page.jpg'
+        ]
+      },
+      /* 8 */
+      {
+        title: 'Zaoba',
+        photos: [
+          'assets/images/ZAOBA/cover/front%20page.JPG',
+          'assets/images/ZAOBA/M%20TORTURE/1144782056.jpg',
+          'assets/images/ZAOBA/M%20TORTURE/1144783540.jpg',
+          'assets/images/ZAOBA/M%20TORTURE/1144783676.jpg',
+          'assets/images/ZAOBA/M%20TORTURE/1144784454.jpg',
+          'assets/images/ZAOBA/M%20TORTURE/header.jpg',
+          'assets/images/ZAOBA/ONHIM/1144784622.jpg',
+          'assets/images/ZAOBA/ONHIM/1144785188.jpg',
+          'assets/images/ZAOBA/ONHIM/1144785598.JPG',
+          'assets/images/ZAOBA/ONHIM/1144786213-2.jpg',
+          'assets/images/ZAOBA/ONHIM/front%20page.jpg',
+          'assets/images/ZAOBA/PIVOT/1144881654.JPG',
+          'assets/images/ZAOBA/PIVOT/1144881972.JPG',
+          'assets/images/ZAOBA/PIVOT/1144882177.JPG',
+          'assets/images/ZAOBA/PIVOT/front%201.JPG',
+          'assets/images/ZAOBA/PIVOT/page.JPG',
+          'assets/images/ZAOBA/STRETCHLINE/1144883669.JPG',
+          'assets/images/ZAOBA/STRETCHLINE/1144883726.JPG',
+          'assets/images/ZAOBA/STRETCHLINE/1144884027.JPG',
+          'assets/images/ZAOBA/STRETCHLINE/1144884230.JPG'
+        ]
+      },
+      /* 9 */
+      {
+        title: 'Buoy Necklace',
+        photos: [
+          'assets/images/Buoy%20Necklace%20/cover/Untitled-1-Recovered_08.jpg',
+          'assets/images/Buoy%20Necklace%20/1137557660.jpg',
+          'assets/images/Buoy%20Necklace%20/1137557850.jpg',
+          'assets/images/Buoy%20Necklace%20/1137558105.jpg',
+          'assets/images/Buoy%20Necklace%20/1137558141.jpg',
+          'assets/images/Buoy%20Necklace%20/1137558384.jpg',
+          'assets/images/Buoy%20Necklace%20/Untitled-1-Recovered_03.jpg',
+          'assets/images/Buoy%20Necklace%20/Untitled-1-Recovered_06.jpg',
+          'assets/images/Buoy%20Necklace%20/Untitled-1-Recovered_07.jpg',
+          'assets/images/Buoy%20Necklace%20/Untitled-1-Recovered_09.jpg'
+        ]
+      },
+      /* 10 */
+      {
+        title: 'Bull S2',
+        photos: [
+          'assets/images/Bull%20S2/cover/front%20page.jpg',
+          'assets/images/Bull%20S2/0009_original.jpg',
+          'assets/images/Bull%20S2/0096_original.jpg',
+          'assets/images/Bull%20S2/0105_original.jpg',
+          'assets/images/Bull%20S2/0123_original%20copy.jpg',
+          'assets/images/Bull%20S2/0126_original.jpg',
+          'assets/images/Bull%20S2/0140_original.jpg',
+          'assets/images/Bull%20S2/0164_original.jpg',
+          'assets/images/Bull%20S2/0229_original.jpg'
+        ]
+      },
+      /* 11 */
+      {
+        title: 'Bull S1',
+        photos: [
+          'assets/images/Bull%20S1/cover/front%20page1.jpg',
+          'assets/images/Bull%20S1/0003_original.jpg',
+          'assets/images/Bull%20S1/0044_original.jpg',
+          'assets/images/Bull%20S1/0049_original.jpg',
+          'assets/images/Bull%20S1/fe.jpg'
+        ]
+      },
+      /* 12 */
+      {
+        title: 'Maven Watch',
+        photos: [
+          'assets/images/maven%20watch/cover/front%20page.jpg',
+          'assets/images/maven%20watch/CNV000060.jpg',
+          'assets/images/maven%20watch/CNV000063.jpg',
+          'assets/images/maven%20watch/CNV000076.jpg',
+          'assets/images/maven%20watch/headers.jpg'
+        ]
+      },
+      /* 13 */
+      {
+        title: 'Asics Sportstyle',
+        photos: [
+          'assets/images/Asics%20Sportstyle%20-%20Collection%202024/cover/header.jpg',
+          'assets/images/Asics%20Sportstyle%20-%20Collection%202024/ASICS%20SPORTSTYLE%20A%3AW%20-%20apparel%20collection%202024/IMG_8718.jpg',
+          'assets/images/Asics%20Sportstyle%20-%20Collection%202024/ASICS%20SPORTSTYLE%20A%3AW%20-%20apparel%20collection%202024/IMG_8719.jpg',
+          'assets/images/Asics%20Sportstyle%20-%20Collection%202024/ASICS%20SPORTSTYLE%20A%3AW%20-%20apparel%20collection%202024/IMG_8720.jpg',
+          'assets/images/Asics%20Sportstyle%20-%20Collection%202024/ASICS%20SPORTSTYLE%20A%3AW%20-%20apparel%20collection%202024/_E2A0712-Enhanced-NR-Edit-3.jpg',
+          'assets/images/Asics%20Sportstyle%20-%20Collection%202024/ASICS%20SPORTSTYLE%20A%3AW%20-%20apparel%20collection%202024/asics%20location%202.jpg',
+          'assets/images/Asics%20Sportstyle%20-%20Collection%202024/ASICS%20SPORTSTYLE%20A%3AW%20-%20apparel%20collection%202024/front%20page.jpg',
+          'assets/images/Asics%20Sportstyle%20-%20Collection%202024/ASICS%20SPORTSTYLE%20A%3AW%20-%20apparel%20collection%202024/header.jpg',
+          'assets/images/Asics%20Sportstyle%20-%20Collection%202024/ASICS%20SPORTSTYLE%20S%3AS%20-%20apparel%20collection%202024/CNV000003.jpg',
+          'assets/images/Asics%20Sportstyle%20-%20Collection%202024/ASICS%20SPORTSTYLE%20S%3AS%20-%20apparel%20collection%202024/CNV000022-3.jpg',
+          'assets/images/Asics%20Sportstyle%20-%20Collection%202024/ASICS%20SPORTSTYLE%20S%3AS%20-%20apparel%20collection%202024/CNV000026.jpg',
+          'assets/images/Asics%20Sportstyle%20-%20Collection%202024/ASICS%20SPORTSTYLE%20S%3AS%20-%20apparel%20collection%202024/CNV000072.jpg',
+          'assets/images/Asics%20Sportstyle%20-%20Collection%202024/ASICS%20SPORTSTYLE%20S%3AS%20-%20apparel%20collection%202024/CNV000097-Edit-2.jpg',
+          'assets/images/Asics%20Sportstyle%20-%20Collection%202024/ASICS%20SPORTSTYLE%20S%3AS%20-%20apparel%20collection%202024/front%20page.jpg'
+        ]
+      },
+      /* 14 */
+      {
+        title: 'Gosh SS 2024',
+        photos: [
+          'assets/images/GOSH%20Spring%20%3A%20%20Summer%202024/cover/header.jpg',
+          'assets/images/GOSH%20Spring%20%3A%20%20Summer%202024/CNV000008-2.jpg',
+          'assets/images/GOSH%20Spring%20%3A%20%20Summer%202024/CNV000025.jpg',
+          'assets/images/GOSH%20Spring%20%3A%20%20Summer%202024/CNV000031-2.jpg',
+          'assets/images/GOSH%20Spring%20%3A%20%20Summer%202024/CNV000032-2.jpg',
+          'assets/images/GOSH%20Spring%20%3A%20%20Summer%202024/CNV000033-2.jpg',
+          'assets/images/GOSH%20Spring%20%3A%20%20Summer%202024/front%20page.jpg'
+        ]
+      },
+      /* 15 */
+      {
+        title: 'Keen FW 2025',
+        photos: [
+          'assets/images/keen%20Fall%20%3A%20Winter%202025/cover/front%20page.jpg',
+          'assets/images/keen%20Fall%20%3A%20Winter%202025/IMG_1601.jpg',
+          'assets/images/keen%20Fall%20%3A%20Winter%202025/IMG_1627.jpg',
+          'assets/images/keen%20Fall%20%3A%20Winter%202025/IMG_1735-2.jpg',
+          'assets/images/keen%20Fall%20%3A%20Winter%202025/IMG_1739.jpg',
+          'assets/images/keen%20Fall%20%3A%20Winter%202025/IMG_1742.jpg',
+          'assets/images/keen%20Fall%20%3A%20Winter%202025/IMG_1746.jpg',
+          'assets/images/keen%20Fall%20%3A%20Winter%202025/IMG_1749-2.jpg',
+          'assets/images/keen%20Fall%20%3A%20Winter%202025/IMG_1758.jpg'
+        ]
+      },
+      /* 16 */
+      {
+        title: 'Asics Gel Kayano 2024',
+        photos: [
+          'assets/images/Asics%20Gel%20Kayano%202024%20/cover/header.jpg',
+          'assets/images/Asics%20Gel%20Kayano%202024%20/TOKYO/000016150033-Edit.jpg',
+          'assets/images/Asics%20Gel%20Kayano%202024%20/TOKYO/000016180003.jpg',
+          'assets/images/Asics%20Gel%20Kayano%202024%20/TOKYO/000016200009-2.jpg',
+          'assets/images/Asics%20Gel%20Kayano%202024%20/TOKYO/front%20page.jpg',
+          'assets/images/Asics%20Gel%20Kayano%202024%20/TOKYO/header.jpg',
+          'assets/images/Asics%20Gel%20Kayano%202024%20/KYOTO/000017890008-2.jpg',
+          'assets/images/Asics%20Gel%20Kayano%202024%20/KYOTO/CNV000067-2.jpg',
+          'assets/images/Asics%20Gel%20Kayano%202024%20/KYOTO/IMG_3403.jpg'
+        ]
+      },
+      /* 17 */
+      {
+        title: 'Dr. Martens FW 2025',
+        photos: [
+          'assets/images/DR%20MARTENS%20Fall%20%3A%20Winter%202025/cover/front%20page.jpg',
+          'assets/images/DR%20MARTENS%20Fall%20%3A%20Winter%202025/DR%20MARTENS%20DAY%202-2616.jpg',
+          'assets/images/DR%20MARTENS%20Fall%20%3A%20Winter%202025/DR%20MARTENS%20DAY%202-2623.jpg',
+          'assets/images/DR%20MARTENS%20Fall%20%3A%20Winter%202025/DR%20MARTENS%20DAY%202-2693.jpg',
+          'assets/images/DR%20MARTENS%20Fall%20%3A%20Winter%202025/DR%20MARTENS%20DAY%202-2705.jpg',
+          'assets/images/DR%20MARTENS%20Fall%20%3A%20Winter%202025/DR%20MARTENS%20DAY%202-2721.jpg',
+          'assets/images/DR%20MARTENS%20Fall%20%3A%20Winter%202025/DR%20MARTENS%20DAY%202-2756.jpg',
+          'assets/images/DR%20MARTENS%20Fall%20%3A%20Winter%202025/DR%20MARTENS%20DAY%203-2910.jpg',
+          'assets/images/DR%20MARTENS%20Fall%20%3A%20Winter%202025/DR%20MARTENS%20DAY%203-2932.jpg'
+        ]
+      }
+    ];
+
+    /* ── Gallery state ─────────────────────────────────────────────────── */
+    var galOverlay  = document.getElementById('gallery');
+    var galTitle    = document.getElementById('gal-title');
+    var galClose    = document.getElementById('gal-close');
+    var galScroll  = document.getElementById('gal-scroll');
+    var triggerEl  = null;
+
+    function openGallery(p) {
+      galTitle.textContent = p.title;
+      galScroll.innerHTML = '';
+
+      var colL = document.createElement('div');
+      var colR = document.createElement('div');
+      colL.className = 'gal-col';
+      colR.className = 'gal-col';
+
+      var seen = {};
+      var galleryPhotos = p.photos.filter(function (src) {
+        var name = src.split('/').pop();
+        if (seen[name]) return false;
+        seen[name] = true;
+        return true;
+      });
+      galleryPhotos.forEach(function (src, i) {
+        var img = document.createElement('img');
+        img.className = 'gal-photo';
+        img.src = src;
+        img.alt = p.title + ' ' + (i + 1);
+        (i % 2 === 0 ? colL : colR).appendChild(img);
+      });
+
+      galScroll.appendChild(colL);
+      galScroll.appendChild(colR);
+
+      triggerEl = document.activeElement;
+      document.body.classList.add('gallery-open');
+      galOverlay.classList.add('open');
+      galOverlay.setAttribute('aria-hidden', 'false');
+      galOverlay.scrollTop = 0;
+      requestAnimationFrame(function () { galClose.focus(); });
+    }
+
+    function closeGallery() {
+      galOverlay.classList.remove('open');
+      galOverlay.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('gallery-open');
+      if (triggerEl) { triggerEl.focus(); triggerEl = null; }
+    }
+
+    galClose.addEventListener('click', closeGallery);
+
+    document.addEventListener('keydown', function (e) {
+      if (!galOverlay.classList.contains('open')) return;
+      if (e.key === 'Escape') closeGallery();
+    });
+
+    /* ── Build project blocks ──────────────────────────────────────────── */
+    var mainEl = document.getElementById('main-content');
+
+    PROJECTS.forEach(function (p) {
+      var currentIdx = 0;
+      var total = p.photos.length;
+
+      /* outer wrapper — not interactive itself */
+      var block = document.createElement('div');
+      block.className = 'project-block';
+
+      /* photo-wrap — relative ancestor for arrows; click opens gallery */
+      var wrap = document.createElement('div');
+      wrap.className = 'photo-wrap';
+      wrap.setAttribute('role', 'button');
+      wrap.setAttribute('tabindex', '0');
+      wrap.setAttribute('aria-label', 'Open ' + p.title + ' gallery');
+
+      /* cover photo */
+      var img = document.createElement('img');
+      img.className = 'cover-photo';
+      img.src = p.photos[0];
+      img.alt = p.title;
+      img.addEventListener('load', function () { this.style.opacity = '1'; });
+      img.addEventListener('error', function () { this.style.opacity = '0.15'; });
+      if (img.complete && img.naturalWidth) img.style.opacity = '1';
+
+      /* prev arrow — ‹ (single left-pointing angle quotation mark) */
+      var prevBtn = document.createElement('button');
+      prevBtn.className = 'slide-btn slide-btn-prev';
+      prevBtn.setAttribute('aria-label', 'Previous photo');
+      prevBtn.innerHTML = '&#8249;';   /* ‹ */
+      if (total <= 1) prevBtn.hidden = true;
+
+      /* next arrow — › */
+      var nextBtn = document.createElement('button');
+      nextBtn.className = 'slide-btn slide-btn-next';
+      nextBtn.setAttribute('aria-label', 'Next photo');
+      nextBtn.innerHTML = '&#8250;';   /* › */
+      if (total <= 1) nextBtn.hidden = true;
+
+      function goTo(idx) {
+        currentIdx = (idx + total) % total;
+        img.style.opacity = '0';
+        img.src = p.photos[currentIdx];
+      }
+
+      prevBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        goTo(currentIdx - 1);
+      });
+      nextBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        goTo(currentIdx + 1);
+      });
+
+      wrap.addEventListener('click', function () { openGallery(p); });
+      wrap.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openGallery(p); }
+      });
+
+      /* project title — sits below photo-wrap, right-aligned by flex */
+      var title = document.createElement('div');
+      title.className = 'project-title';
+      title.textContent = p.title;
+
+      wrap.appendChild(img);
+      wrap.appendChild(prevBtn);
+      wrap.appendChild(nextBtn);
+      block.appendChild(wrap);
+      block.appendChild(title);
+
+      mainEl.appendChild(block);
+    });
+
+  }());
+  </script>
+</body>
+</html>
