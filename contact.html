@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="About — Enzo Piquet">
-  <title>About — Enzo Piquet</title>
+  <meta name="description" content="Contact — Enzo Piquet">
+  <title>Contact — Enzo Piquet</title>
   <style>
     /* ── Reset ── */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,6 +19,7 @@
       font-size: 12px;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     /* ── Sidebar ── */
@@ -60,29 +61,27 @@
     /* ── Main ── */
     main {
       margin-left: 190px;
-      min-height: 100vh;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
     }
 
-    /* ── Layout: photo left, info right ── */
-    .about-layout {
-      display: flex;
-      gap: 60px;
-      align-items: center;
+    /* ── Video ── */
+    .contact-video {
+      width: 70%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      overflow: hidden;
     }
-
-    /* ── Portrait ── */
-    .about-photo img {
-      width: 240px;
-      height: auto;
+    .contact-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       display: block;
     }
 
     /* ── Info ── */
-    .about-info {
-      padding-top: 4px;
+    .contact-info {
+      padding: 60px 60px 140px;
     }
     .about-name {
       font-size: 12px;
@@ -115,9 +114,9 @@
       .nav-parent { display: none; }
       .nav-sub { padding-left: 0; margin-right: 14px; line-height: 1.6; }
       .nav-contact { margin-top: 0; }
-      main { min-height: calc(100vh - 60px); }
-      .about-layout { flex-direction: column; gap: 30px; align-items: flex-start; padding: 0 20px; }
-      .about-photo img { width: 160px; }
+      main { margin-left: 0; }
+      .contact-video { width: 100%; }
+      .contact-info { padding: 40px 20px 80px; }
     }
   </style>
 </head>
@@ -134,23 +133,22 @@
   </aside>
 
   <main>
-    <div class="about-layout">
 
-      <!-- Portrait -->
-      <div class="about-photo">
-        <img src="assets/images/portrait/SaveClip.App_464864717_18251748013261301_8156044011587412282_n.jpg"
-             alt="Enzo Piquet">
-      </div>
-
-      <!-- Info -->
-      <div class="about-info">
-        <div class="about-name">Enzo Piquet</div>
-        <div class="about-line">+66 07090200972</div>
-        <div class="about-line"><a href="mailto:enzopiquet93@gmail.com">enzopiquet93@gmail.com</a></div>
-        <div class="about-line"><a href="https://instagram.com/zenzopics" target="_blank">Instagram: @zenzopics</a></div>
-      </div>
-
+    <!-- Video -->
+    <div class="contact-video">
+      <video autoplay muted loop playsinline>
+        <source src="assets/video/HOME/BW%2016mm.mov" type="video/mp4">
+      </video>
     </div>
+
+    <!-- Contact info -->
+    <div class="contact-info">
+      <div class="about-name">Enzo Piquet</div>
+      <div class="about-line">+66 07090200972</div>
+      <div class="about-line"><a href="mailto:enzopiquet93@gmail.com">enzopiquet93@gmail.com</a></div>
+      <div class="about-line"><a href="https://instagram.com/zenzopics" target="_blank">Instagram: @zenzopics</a></div>
+    </div>
+
   </main>
 
 </body>

@@ -16,34 +16,19 @@
       flex-direction: column;
     }
 
-    /* ── Video ── */
-    .home-video {
+    /* ── Portrait ── */
+    .home-portrait {
       width: 70%;
-      aspect-ratio: 16/9;
-      background: #000;
-      overflow: hidden;
     }
-    .home-video video {
+    .home-portrait img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
       display: block;
-    }
-    .home-video-placeholder {
-      width: 100%;
-      height: 100%;
-      background: #e8e8e8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      color: #999;
-      letter-spacing: 0.05em;
     }
 
     /* ── Bio ── */
     .home-bio {
-      padding: 80px 60px 140px;
+      padding: 60px 60px 140px;
       max-width: 640px;
     }
     .home-bio p {
@@ -58,7 +43,7 @@
 
     @media (max-width: 768px) {
       .home-main { margin-left: 0; }
-      .home-video { width: 100%; }
+      .home-portrait { width: 100%; }
       .home-bio { padding: 40px 20px 80px; }
       .home-bio p { font-size: 14px; }
     }
@@ -78,11 +63,10 @@
 
   <main class="home-main">
 
-    <!-- Landing video -->
-    <div class="home-video">
-      <video autoplay muted loop playsinline>
-        <source src="assets/video/HOME/BW%2016mm.mov" type="video/mp4">
-      </video>
+    <!-- Portrait -->
+    <div class="home-portrait">
+      <img src="assets/images/portrait/SaveClip.App_464864717_18251748013261301_8156044011587412282_n.jpg"
+           alt="Enzo Piquet">
     </div>
 
     <!-- Bio -->
