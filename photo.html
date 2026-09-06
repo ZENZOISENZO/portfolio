@@ -202,6 +202,56 @@
       width: 100%;
       height: auto;
     }
+
+    /* ── Mobile ─────────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      /* Sidebar becomes top bar */
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 18px 20px 12px;
+        display: flex;
+        align-items: baseline;
+        gap: 20px;
+        border-bottom: 1px solid #e8e8e8;
+      }
+      .site-name {
+        font-size: 13px;
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+      .sidebar-nav {
+        flex-direction: row;
+        align-items: baseline;
+        gap: 0;
+        flex-wrap: wrap;
+      }
+      .nav-parent { display: none; }
+      .nav-sub {
+        padding-left: 0;
+        margin-right: 14px;
+        line-height: 1.6;
+      }
+      .nav-contact { margin-top: 0; margin-right: 0; }
+
+      /* Photo grid: 1 column */
+      main {
+        margin-left: 0;
+        padding: 24px 16px 80px;
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      /* Hide slide arrows on touch */
+      .slide-btn { display: none; }
+
+      /* Gallery: single column on mobile */
+      .gallery-scroll { flex-direction: column; gap: 40px; }
+      .gal-col { gap: 40px; }
+      .gallery-inner { padding: 48px 16px 60px; }
+      .gallery-x { top: 16px; right: 20px; }
+    }
   </style>
 </head>
 <body>
