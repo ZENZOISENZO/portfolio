@@ -30,7 +30,7 @@ main{ margin-left: 190px; padding: 80px 60px 160px; box-sizing: border-box; }
 @media (max-width: 768px){
   main{ padding: 24px 16px 80px; }
 
-  .video-entry{ margin-bottom: 60px; }
+  .video-entry{ margin-bottom: 120px; }
   .video-entry-title{ width: 100%; text-align: left; }
 
   /* Stack video + stills vertically */
