@@ -21,9 +21,44 @@ main{ margin-left: 190px; padding: 80px 60px 160px; box-sizing: border-box; }
 /* Caption style */
 /* caption style is controlled by the single .video-entry-title rule above */
 
-/* Responsive: scale down while preserving exact type and line-heights */
+/* ── Tablet ── */
 @media (max-width: 1280px){
   main{ margin-left: 0; padding: 40px 20px 80px; }
-  .video-player{ width: 100%; height: auto; aspect-ratio: 16/9; }
-  .video-shots{ grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 5px; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px){
+  main{ padding: 24px 16px 80px; }
+
+  .video-entry{ margin-bottom: 60px; }
+  .video-entry-title{ width: 100%; text-align: left; }
+
+  /* Stack video + stills vertically */
+  .video-layout{ flex-direction: column; gap: 8px; }
+
+  /* Video: full width, 16:9 */
+  .video-player{
+    flex: none;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+  .video-player iframe,
+  .video-player video{ width: 100%; height: 100%; }
+
+  /* Stills: 2×2 grid below video, square-ish */
+  .video-shots{
+    flex: none;
+    width: 100%;
+    height: auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 4px;
+  }
+  .video-shots img{
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
 }
