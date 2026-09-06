@@ -28,7 +28,10 @@ main{ margin-left: 190px; padding: 80px 60px 160px; box-sizing: border-box; }
 
 /* ── Mobile ── */
 @media (max-width: 768px){
-  main{ padding: 24px 16px 80px; }
+  /* Kill the 1920px canvas width */
+  .canvas { width: 100% !important; max-width: 100% !important; }
+
+  main{ padding: 24px 16px 80px; overflow-x: hidden; }
 
   /* Force sidebar to match photo tab exactly */
   .sidebar {
